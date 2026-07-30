@@ -3,6 +3,7 @@ import ProjectFilter from '../../components/ProjectFilter';
 import SectionLabel from '../../components/SectionLabel.astro';
 import Layout from '../../layouts/Layout.astro';
 import { categories, projects } from '../../data/projects';
+import { sitePath } from '../../utils/site-path';
 
 const requestedCategory = Astro.url.searchParams.get('category') ?? 'All';
 const initialCategory =
@@ -34,7 +35,7 @@ const initialCategory =
             <span class="page-hero__meta-value">PH</span>
           </div>
         </div>
-        <a class="button-secondary w-fit" href="/contact">Discuss a project <span aria-hidden="true">↗</span></a>
+        <a class="button-secondary w-fit" href={sitePath('/contact')}>Discuss a project <span aria-hidden="true">↗</span></a>
       </div>
     </div>
   </section>

@@ -1,5 +1,6 @@
 ---
 import SocialIcon from './SocialIcon.astro';
+import { sitePath } from '../utils/site-path';
 ---
 
 <footer class="container-shell site-footer border-t rule py-8 md:py-10">
@@ -16,12 +17,12 @@ import SocialIcon from './SocialIcon.astro';
 
     <div class="site-footer__side">
       <nav class="site-footer__nav" aria-label="Footer navigation">
-        <a href="/"><span class="site-footer__nav-index">01</span><span>Home</span></a>
-        <a href="/about"><span class="site-footer__nav-index">02</span><span>About</span></a>
-        <a href="/stack"><span class="site-footer__nav-index">03</span><span>Stack</span></a>
-        <a href="/projects"><span class="site-footer__nav-index">04</span><span>Projects</span></a>
-        <a href="/gear"><span class="site-footer__nav-index">05</span><span>Gear</span></a>
-        <a href="/contact"><span class="site-footer__nav-index">06</span><span>Contact</span></a>
+        <a href={sitePath('/')}><span class="site-footer__nav-index">01</span><span>Home</span></a>
+        <a href={sitePath('/about')}><span class="site-footer__nav-index">02</span><span>About</span></a>
+        <a href={sitePath('/stack')}><span class="site-footer__nav-index">03</span><span>Stack</span></a>
+        <a href={sitePath('/projects')}><span class="site-footer__nav-index">04</span><span>Projects</span></a>
+        <a href={sitePath('/gear')}><span class="site-footer__nav-index">05</span><span>Gear</span></a>
+        <a href={sitePath('/contact')}><span class="site-footer__nav-index">06</span><span>Contact</span></a>
       </nav>
 
       <div class="flex flex-wrap items-center gap-2 text-[0.75rem] font-semibold text-[var(--muted)]">

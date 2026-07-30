@@ -2,6 +2,7 @@
 import { ClientRouter } from 'astro:transitions';
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
+import { sitePath } from '../utils/site-path';
 import '../styles/global.css';
 
 interface Props {
@@ -19,7 +20,7 @@ const {
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin);
-const imageURL = new URL(image, Astro.site ?? Astro.url.origin);
+const imageURL = new URL(sitePath(image), Astro.site ?? Astro.url.origin);
 ---
 
 <!doctype html>
@@ -32,7 +33,7 @@ const imageURL = new URL(image, Astro.site ?? Astro.url.origin);
     <meta name="theme-color" content="#ffffff" />
     {noIndex && <meta name="robots" content="noindex, nofollow" />}
     <link rel="canonical" href={canonicalURL} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href={sitePath('/favicon.svg')} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

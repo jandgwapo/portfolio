@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { sitePath } from '../utils/site-path';
 ---
 
 <Layout title="Page not found — Jandy Arpon" noIndex>
@@ -12,8 +13,8 @@ import Layout from '../layouts/Layout.astro';
       This page wandered off. Let’s get you back somewhere useful.
     </p>
     <div class="mt-8 flex flex-wrap gap-3">
-      <a class="button-primary w-fit" href="/">Back home <span aria-hidden="true">↗</span></a>
-      <a class="button-secondary w-fit" href="/projects">Browse projects <span aria-hidden="true">↗</span></a>
+      <a class="button-primary w-fit" href={sitePath('/')}>Back home <span aria-hidden="true">↗</span></a>
+      <a class="button-secondary w-fit" href={sitePath('/projects')}>Browse projects <span aria-hidden="true">↗</span></a>
     </div>
   </section>
 </Layout>

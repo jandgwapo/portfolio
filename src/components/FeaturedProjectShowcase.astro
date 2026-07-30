@@ -3,6 +3,7 @@ import IconArrow from './IconArrow.astro';
 import ProjectVisual from './ProjectVisual.astro';
 import ProjectTools from './ProjectTools.astro';
 import type { Project } from '../types';
+import { sitePath } from '../utils/site-path';
 
 interface Props {
   project: Project;
@@ -53,7 +54,7 @@ const { project, reverse = false } = Astro.props;
       </div>
     </div>
     <div class="flex flex-wrap items-center gap-5">
-      <a class="button-primary" href={`/projects/${project.slug}`}>View case study <IconArrow /></a>
+      <a class="button-primary" href={sitePath(`/projects/${project.slug}`)}>View case study <IconArrow /></a>
       {
         project.liveUrl && (
           <a

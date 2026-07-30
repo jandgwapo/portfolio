@@ -1,6 +1,7 @@
 import { useMemo, useState, type MouseEvent } from 'react';
 import type { Project } from '../types';
 import { getTechIcon } from '../data/tech-icons';
+import { sitePath } from '../utils/site-path';
 
 type Props = {
   projects: Project[];
@@ -109,7 +110,13 @@ export default function ProjectFilter({ projects, categories, initialCategory = 
               <a
                 key={category}
                 data-project-category={category}
-                href={category.trim().toLowerCase() === 'all' ? '/projects' : '/projects?category=' + encodeURIComponent(category)}
+                href={
+                  sitePath(
+                    category.trim().toLowerCase() === 'all'
+                      ? '/projects'
+                      : '/projects?category=' + encodeURIComponent(category),
+                  )
+                }
                 onClick={(event) => handleCategoryClick(event, category)}
                 aria-current={isActive ? 'page' : undefined}
                 className={`project-filter__button min-h-11 rounded-full border px-4 py-2 text-xs font-bold transition-colors ${isActive ? 'border-[var(--foreground)] bg-[var(--foreground)] text-[var(--background)]' : 'border-[var(--line-strong)] text-[var(--muted)] hover:border-[var(--foreground)] hover:text-[var(--foreground)]'}`}
@@ -123,7 +130,7 @@ export default function ProjectFilter({ projects, categories, initialCategory = 
       {filteredProjects.length > 0 ? (
         <div className="project-filter__grid grid gap-x-7 gap-y-14 md:grid-cols-2">
           {filteredProjects.map((project) => (
-            <a className="project-link group block" href={`/projects/${project.slug}`} key={project.slug}>
+            <a className="project-link group block" href={sitePath(`/projects/${project.slug}`)} key={project.slug}>
               <ProjectImage project={project} />
               <div className="mt-4 flex items-start justify-between gap-5 border-b border-[var(--line)] pb-5">
                 <div>

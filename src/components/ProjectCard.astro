@@ -2,6 +2,7 @@
 import ProjectVisual from './ProjectVisual.astro';
 import ProjectTools from './ProjectTools.astro';
 import type { Project } from '../types';
+import { sitePath } from '../utils/site-path';
 
 interface Props {
   project: Project;
@@ -12,7 +13,7 @@ const { project, compact = false } = Astro.props;
 const visualClass = compact ? 'aspect-[1.35/1]' : 'aspect-[1.15/1] md:aspect-[1.45/1]';
 ---
 
-<a class="project-link group block" href={`/projects/${project.slug}`}>
+<a class="project-link group block" href={sitePath(`/projects/${project.slug}`)}>
   {
     project.liveUrl ? (
       <div class="project-image live-site-preview relative block aspect-[16/10] w-full">

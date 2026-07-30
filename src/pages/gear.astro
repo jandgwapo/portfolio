@@ -4,6 +4,7 @@ import IconArrow from '../components/IconArrow.astro';
 import SectionLabel from '../components/SectionLabel.astro';
 import Layout from '../layouts/Layout.astro';
 import { gear } from '../data/gear';
+import { sitePath } from '../utils/site-path';
 ---
 
 <Layout
@@ -34,7 +35,7 @@ import { gear } from '../data/gear';
             <span class="page-hero__meta-value">Practical</span>
           </div>
         </div>
-        <a class="button-secondary w-fit" href="/contact">Work with me <span aria-hidden="true">↗</span></a>
+        <a class="button-secondary w-fit" href={sitePath('/contact')}>Work with me <span aria-hidden="true">↗</span></a>
       </div>
     </div>
   </section>
@@ -62,7 +63,7 @@ import { gear } from '../data/gear';
       <p class="max-w-xl text-2xl font-medium leading-tight tracking-[-0.05em]">
         Good tools help, but thoughtful work is still the main setup.
       </p>
-      <a class="button-secondary" href="/contact">Work With Me <IconArrow /></a>
+      <a class="button-secondary" href={sitePath('/contact')}>Work With Me <IconArrow /></a>
     </div>
   </section>
 </Layout>

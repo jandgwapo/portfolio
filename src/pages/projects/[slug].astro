@@ -5,6 +5,7 @@ import ProjectTools from '../../components/ProjectTools.astro';
 import SectionLabel from '../../components/SectionLabel.astro';
 import Layout from '../../layouts/Layout.astro';
 import { projects } from '../../data/projects';
+import { sitePath } from '../../utils/site-path';
 
 type StudyModule = {
   default: any;
@@ -30,7 +31,7 @@ const nextProject = projects[(projectIndex + 1) % projects.length];
         class="flex flex-wrap items-center justify-between gap-5 border-b rule pb-5 text-[0.68rem] font-bold uppercase tracking-[0.14em] text-[var(--muted)]"
         aria-label="Project navigation"
       >
-        <a class="transition-colors hover:text-[var(--foreground)]" href="/projects">← All projects</a>
+        <a class="transition-colors hover:text-[var(--foreground)]" href={sitePath('/projects')}>← All projects</a>
         <span>Project {project.number} / {project.year}</span>
       </nav>
       {
@@ -120,14 +121,14 @@ const nextProject = projects[(projectIndex + 1) % projects.length];
         </p>
       </div>
       <div class="mt-10 grid gap-3 border-t rule pt-5 sm:grid-cols-2">
-        <a class="group flex items-center justify-between gap-4 py-3 text-sm font-semibold" href={'/projects/' + previousProject.slug}>
+        <a class="group flex items-center justify-between gap-4 py-3 text-sm font-semibold" href={sitePath('/projects/' + previousProject.slug)}>
           <span>
             <span class="mb-1 block font-mono text-[0.55rem] uppercase tracking-[0.08em] text-[var(--muted)]">Previous project</span>
             {previousProject.title}
           </span>
           <span class="text-lg transition-transform group-hover:-translate-x-1" aria-hidden="true">←</span>
         </a>
-        <a class="group flex items-center justify-between gap-4 border-t rule py-3 text-sm font-semibold sm:border-l sm:border-t-0 sm:pl-5" href={'/projects/' + nextProject.slug}>
+        <a class="group flex items-center justify-between gap-4 border-t rule py-3 text-sm font-semibold sm:border-l sm:border-t-0 sm:pl-5" href={sitePath('/projects/' + nextProject.slug)}>
           <span>
             <span class="mb-1 block font-mono text-[0.55rem] uppercase tracking-[0.08em] text-[var(--muted)]">Next project</span>
             {nextProject.title}

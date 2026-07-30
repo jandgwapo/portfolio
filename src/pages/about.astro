@@ -3,6 +3,7 @@ import IconArrow from '../components/IconArrow.astro';
 import GithubContributions from '../components/GithubContributions.astro';
 import SectionLabel from '../components/SectionLabel.astro';
 import Layout from '../layouts/Layout.astro';
+import { sitePath } from '../utils/site-path';
 ---
 
 <Layout
@@ -20,7 +21,7 @@ import Layout from '../layouts/Layout.astro';
       <div class="relative w-full max-w-md md:max-w-none">
         <div class="project-image aspect-[4/5] w-full">
           <img
-            src="/me.png"
+            src={sitePath('/me.png')}
             alt="Portrait of Jandy Arpon"
             loading="eager"
             decoding="async"
@@ -48,8 +49,8 @@ import Layout from '../layouts/Layout.astro';
           interfaces, reliable data, and code that is practical to maintain.
         </p>
         <div class="flex flex-wrap gap-3 pt-2">
-          <a class="button-primary" href="/projects">Explore my work <IconArrow /></a>
-          <a class="button-secondary" href="/contact">Start a conversation <IconArrow /></a>
+          <a class="button-primary" href={sitePath('/projects')}>Explore my work <IconArrow /></a>
+          <a class="button-secondary" href={sitePath('/contact')}>Start a conversation <IconArrow /></a>
         </div>
       </div>
     </div>
@@ -173,7 +174,7 @@ import Layout from '../layouts/Layout.astro';
       <p class="max-w-xl text-2xl font-medium leading-tight tracking-[-0.05em]">
         If you’re building a web or mobile product, we’ll probably get along.
       </p>
-      <a class="button-primary" href="/contact">Say hello <IconArrow /></a>
+      <a class="button-primary" href={sitePath('/contact')}>Say hello <IconArrow /></a>
     </div>
   </section>
 </Layout>
