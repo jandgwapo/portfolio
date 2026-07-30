@@ -1,0 +1,31 @@
+---
+import { getTechIcon } from '../data/tech-icons';
+import TechIcon from './TechIcon.astro';
+
+interface Props {
+  tools: string[];
+  compact?: boolean;
+}
+
+const { tools, compact = false } = Astro.props;
+const pillClass = compact ? 'gap-1.5 px-2.5 py-1 text-[0.62rem]' : 'gap-2 px-3 py-1.5 text-xs';
+---
+
+<div class:list={['flex flex-wrap', compact ? 'gap-1.5' : 'gap-2']} aria-label="Technologies used">
+  {
+    tools.map((tool) => {
+      const icon = getTechIcon(tool);
+
+      return (
+        <span class:list={['inline-flex items-center rounded-full border rule text-[var(--muted)]', pillClass]}>
+          {icon && (
+            <span aria-hidden="true" class="flex shrink-0 items-center justify-center">
+              <TechIcon icon={icon} className={compact ? 'h-3.5 w-3.5' : 'h-4 w-4'} />
+            </span>
+          )}
+          <span>{tool}</span>
+        </span>
+      );
+    })
+  }
+</div>

@@ -1,0 +1,68 @@
+---
+import GearCard from '../components/GearCard.astro';
+import IconArrow from '../components/IconArrow.astro';
+import SectionLabel from '../components/SectionLabel.astro';
+import Layout from '../layouts/Layout.astro';
+import { gear } from '../data/gear';
+---
+
+<Layout
+  title="Gear — Jandy Arpon"
+  description="The laptop, keyboard, and mouse Jandy Arpon uses for web development, mobile app development, and design work."
+>
+  <section class="container-shell page-hero pt-20 md:pt-32">
+    <SectionLabel label="My Gear" />
+    <div class="mt-8 grid gap-8 border-b rule pb-12 md:grid-cols-[1.15fr_0.85fr] md:items-end md:gap-16 md:pb-16">
+      <h1 class="max-w-5xl text-[clamp(3.8rem,10vw,10rem)] font-medium leading-[0.84] tracking-[-0.105em]">
+        Tools For<br /><span class="display-serif">Making Things.</span>
+      </h1>
+      <div class="page-hero__aside max-w-sm">
+        <p class="text-lg leading-snug text-[var(--muted)]">
+          A small look at the setup I use to design, build, test, and support digital products.
+        </p>
+        <div class="page-hero__meta">
+          <div class="page-hero__meta-item">
+            <span class="page-hero__meta-label">Essentials</span>
+            <span class="page-hero__meta-value">03</span>
+          </div>
+          <div class="page-hero__meta-item">
+            <span class="page-hero__meta-label">Use</span>
+            <span class="page-hero__meta-value">Daily</span>
+          </div>
+          <div class="page-hero__meta-item">
+            <span class="page-hero__meta-label">Approach</span>
+            <span class="page-hero__meta-value">Practical</span>
+          </div>
+        </div>
+        <a class="button-secondary w-fit" href="/contact">Work with me <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="container-shell section-space pt-16 md:pt-24">
+    <div class="mb-10 flex items-end justify-between gap-6">
+      <div>
+        <SectionLabel index="01" label="Everyday Setup" />
+        <h2 class="mt-5 max-w-2xl text-[clamp(2.4rem,5vw,5rem)] font-medium leading-[0.92] tracking-[-0.09em]">
+          The Tools Behind The Work.
+        </h2>
+        <p class="section-intro mt-5">
+          Good equipment should reduce friction, stay out of the way, and support the work for long hours.
+        </p>
+      </div>
+      <span class="hidden text-sm text-[var(--muted)] md:block">{gear.length} essentials</span>
+    </div>
+    <div class="grid gap-x-7 gap-y-14 md:grid-cols-2 lg:grid-cols-3">
+      {gear.map((item, index) => <GearCard item={item} index={index} />)}
+    </div>
+  </section>
+
+  <section class="container-shell pb-24 md:pb-40">
+    <div class="flex flex-col gap-6 border-t rule pt-8 md:flex-row md:items-center md:justify-between">
+      <p class="max-w-xl text-2xl font-medium leading-tight tracking-[-0.05em]">
+        Good tools help, but thoughtful work is still the main setup.
+      </p>
+      <a class="button-secondary" href="/contact">Work With Me <IconArrow /></a>
+    </div>
+  </section>
+</Layout>

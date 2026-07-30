@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#ffffff"/>
+  <circle cx="1060" cy="90" r="220" fill="#17db66"/>
+  <path d="M66 80h1068M66 550h1068" stroke="#0d2818" stroke-opacity=".16"/>
+  <text x="66" y="190" font-family="Arial, Helvetica, sans-serif" font-size="25" letter-spacing="5" fill="#0c9549">JANDY ARPON / DESIGNER + DEVELOPER</text>
+  <text x="60" y="385" font-family="Arial, Helvetica, sans-serif" font-size="132" letter-spacing="-9" fill="#020202">Digital work</text>
+  <text x="66" y="480" font-family="Georgia, serif" font-size="104" font-style="italic" letter-spacing="-6" fill="#020202">with a point of view.</text>
+</svg>

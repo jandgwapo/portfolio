@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Page not found — Jandy Arpon" noIndex>
+  <section class="container-shell page-hero flex min-h-[70vh] flex-col justify-center py-20">
+    <p class="eyebrow">404 / not found</p>
+    <h1 class="mt-8 max-w-4xl text-[clamp(4rem,12vw,12rem)] font-medium leading-[0.8] tracking-[-0.11em]">
+      Wrong<br /><span class="display-serif">turn.</span>
+    </h1>
+    <p class="mt-10 max-w-sm text-lg leading-relaxed text-[var(--muted)]">
+      This page wandered off. Let’s get you back somewhere useful.
+    </p>
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a class="button-primary w-fit" href="/">Back home <span aria-hidden="true">↗</span></a>
+      <a class="button-secondary w-fit" href="/projects">Browse projects <span aria-hidden="true">↗</span></a>
+    </div>
+  </section>
+</Layout>

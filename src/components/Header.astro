@@ -1,0 +1,465 @@
+---
+import NavIcon from './NavIcon.astro';
+
+const navItems = [
+  { href: '/', label: 'Home', icon: 'home' },
+  { href: '/about', label: 'About', icon: 'about' },
+  { href: '/stack', label: 'Stack', icon: 'stack' },
+  { href: '/#experience', label: 'Experience', icon: 'experience' },
+  { href: '/#education', label: 'Education', icon: 'education' },
+  { href: '/projects', label: 'Projects', icon: 'projects' },
+  { href: '/gear', label: 'Gear', icon: 'gear' },
+  { href: '/contact', label: 'Contact', icon: 'contact' },
+];
+const currentPath = Astro.url.pathname;
+
+const isCurrentPage = (href: string) =>
+  href === '/'
+    ? currentPath === '/'
+    : !href.includes('#') && (currentPath === href || currentPath.startsWith(`${href}/`));
+---
+
+<header class="container-shell site-header relative z-40">
+  <nav class="site-nav flex items-center justify-between" aria-label="Main navigation">
+    <a href="/" class="site-logo group flex items-center gap-2.5" aria-label="Jandy Arpon home">
+      <span class="site-logo__mark">JA</span>
+      <span class="min-w-0">
+        <span class="site-logo__name block">Jandy Arpon</span>
+        <span class="site-logo__meta site-logo__meta--desktop hidden sm:block">Digital products / PH</span>
+        <span class="site-logo__role">Full-stack web developer + Flutter mobile app developer</span>
+      </span>
+    </a>
+    <div class="site-nav__desktop hidden items-center gap-4 md:flex">
+      <div class="site-nav__links flex items-center gap-0.5">
+        {
+          navItems.map((item) => (
+            <a
+              href={item.href}
+              class:list={['site-nav__link', { 'text-[var(--foreground)]': isCurrentPage(item.href) }]}
+              aria-current={isCurrentPage(item.href) ? 'page' : undefined}
+            >
+              <span class="site-nav__icon">
+                <NavIcon name={item.icon} />
+              </span>
+              <span class="site-nav__label">{item.label}</span>
+            </a>
+          ))
+        }
+      </div>
+      <button class="icon-button theme-toggle" type="button" aria-label="Switch to dark mode" data-theme-toggle>
+        <svg
+          class="theme-icon theme-icon--sun h-4 w-4"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.7"
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="12" r="4"></circle>
+          <path
+            d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"
+          ></path>
+        </svg>
+        <svg
+          class="theme-icon theme-icon--moon h-4 w-4"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.7"
+          aria-hidden="true"
+        >
+          <path d="M20.5 14.8A8.5 8.5 0 0 1 9.2 3.5 8.5 8.5 0 1 0 20.5 14.8Z"></path>
+        </svg>
+      </button>
+    </div>
+    <div class="site-nav__mobile-controls flex items-center gap-2 md:hidden">
+      <button class="icon-button theme-toggle" type="button" aria-label="Switch to dark mode" data-theme-toggle>
+        <svg
+          class="theme-icon theme-icon--sun h-4 w-4"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.7"
+          aria-hidden="true"
+        >
+          <circle cx="12" cy="12" r="4"></circle>
+          <path
+            d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.65 17.65l1.42 1.42M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.65 6.35l1.42-1.42"
+          ></path>
+        </svg>
+        <svg
+          class="theme-icon theme-icon--moon h-4 w-4"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.7"
+          aria-hidden="true"
+        >
+          <path d="M20.5 14.8A8.5 8.5 0 0 1 9.2 3.5 8.5 8.5 0 1 0 20.5 14.8Z"></path>
+        </svg>
+      </button>
+      <button
+        class="icon-button menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label="Open navigation menu"
+        data-menu-toggle
+      >
+        <svg
+          class="menu-icon h-4 w-4"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          aria-hidden="true"
+        >
+          <rect class="menu-icon__tile menu-icon__tile--dark" x="4" y="4" width="7" height="7" rx="1"></rect>
+          <rect class="menu-icon__tile menu-icon__tile--dark" x="13" y="4" width="7" height="7" rx="1"></rect>
+          <rect class="menu-icon__tile menu-icon__tile--dark" x="4" y="13" width="7" height="7" rx="1"></rect>
+          <rect class="menu-icon__tile menu-icon__tile--accent" x="13" y="13" width="7" height="7" rx="1"></rect>
+          <path class="menu-icon__close-line menu-icon__close-line--one" d="m6 6 12 12"></path>
+          <path class="menu-icon__close-line menu-icon__close-line--two" d="m18 6-12 12"></path>
+        </svg>
+      </button>
+    </div>
+  </nav>
+  <button
+    class="site-mobile-menu__backdrop md:hidden"
+    type="button"
+    aria-label="Close navigation menu"
+    tabindex="-1"
+    data-menu-backdrop
+  ></button>
+  <div id="mobile-menu" class="site-mobile-menu md:hidden" data-mobile-menu aria-hidden="true">
+    <div class="site-mobile-menu__head">
+      <span class="site-mobile-menu__identity">
+        <span class="site-mobile-menu__status-dot" aria-hidden="true"></span>
+        <span>JA / Navigation</span>
+      </span>
+      <span class="site-mobile-menu__count">0{navItems.length} routes</span>
+    </div>
+    <div class="site-mobile-menu__command" aria-hidden="true">
+      <span>~/portfolio</span>
+    </div>
+    <div class="site-mobile-menu__links">
+      {
+        navItems.map((item, index) => (
+          <a
+            href={item.href}
+            class="site-mobile-menu__link"
+            aria-current={isCurrentPage(item.href) ? 'page' : undefined}
+          >
+            <span class="site-mobile-menu__number">0{index + 1}</span>
+            <span class="site-mobile-menu__icon" aria-hidden="true">
+              <NavIcon name={item.icon} />
+            </span>
+            <span class="site-mobile-menu__link-copy">
+              <span class="site-mobile-menu__label">{item.label}</span>
+              <span class="site-mobile-menu__type">{item.href.includes('#') ? 'Section' : 'Page'}</span>
+            </span>
+            <span class="site-mobile-menu__arrow" aria-hidden="true">
+              →
+            </span>
+          </a>
+        ))
+      }
+    </div>
+    <div class="site-mobile-menu__foot">
+      <span class="site-mobile-menu__availability">
+        <span class="site-mobile-menu__status-dot" aria-hidden="true"></span>
+        Available for work
+      </span>
+      <span>PH / GMT+8</span>
+    </div>
+  </div>
+</header>
+
+<script>
+  import { Flip } from 'gsap/Flip';
+  import { gsap } from 'gsap';
+
+  gsap.registerPlugin(Flip);
+
+  let themeTransitionTimer: number | undefined;
+
+  const updateThemeLabels = () => {
+    const theme = document.documentElement.dataset.theme;
+    document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]').forEach((button) => {
+      button.setAttribute('aria-label', theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode');
+    });
+  };
+
+  const bindThemeControls = () => {
+    const themeButtons = document.querySelectorAll<HTMLButtonElement>('[data-theme-toggle]');
+    themeButtons.forEach((button) => {
+      if (button.dataset.themeBound === 'true') return;
+      button.dataset.themeBound = 'true';
+      button.addEventListener('click', () => {
+        const nextTheme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+        const root = document.documentElement;
+        root.classList.add('is-theme-transitioning');
+        window.clearTimeout(themeTransitionTimer);
+
+        window.requestAnimationFrame(() => {
+          root.dataset.theme = nextTheme;
+          window.__jandyTheme = nextTheme;
+          updateThemeLabels();
+          themeTransitionTimer = window.setTimeout(() => {
+            root.classList.remove('is-theme-transitioning');
+          }, 760);
+        });
+      });
+    });
+    updateThemeLabels();
+  };
+
+  const restoreTheme = () => {
+    document.documentElement.dataset.theme = window.__jandyTheme || 'light';
+    updateThemeLabels();
+  };
+
+  bindThemeControls();
+  document.addEventListener('astro:after-swap', restoreTheme);
+  document.addEventListener('astro:page-load', () => {
+    restoreTheme();
+    bindThemeControls();
+  });
+
+  let cleanupScrollState: (() => void) | undefined;
+
+  const bindScrollState = () => {
+    cleanupScrollState?.();
+
+    const header = document.querySelector<HTMLElement>('.site-header');
+    if (!header) return;
+
+    const desktopQuery = window.matchMedia('(min-width: 768px)');
+    const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const navTargets = [
+      header,
+      ...Array.from(
+        header.querySelectorAll<HTMLElement>(
+          '.site-nav, .site-logo, .site-nav__desktop, .site-nav__links, .site-nav__link, .icon-button',
+        ),
+      ),
+    ];
+    const icons = Array.from(header.querySelectorAll<HTMLElement>('.site-nav__icon'));
+    let isRail = header.classList.contains('is-scrolled');
+    let frame = 0;
+    let animation: gsap.core.Animation | undefined;
+
+    const morphNavigation = (nextIsRail: boolean) => {
+      if (!desktopQuery.matches || nextIsRail === isRail) return;
+
+      animation?.kill();
+
+      if (reducedMotionQuery.matches) {
+        header.classList.toggle('is-scrolled', nextIsRail);
+        isRail = nextIsRail;
+        gsap.set(icons, { clearProps: 'all' });
+        return;
+      }
+
+      const state = Flip.getState(navTargets);
+
+      if (!nextIsRail) {
+        gsap.set(icons, { display: 'inline-flex' });
+      }
+
+      header.classList.toggle('is-scrolled', nextIsRail);
+      isRail = nextIsRail;
+
+      animation = Flip.from(state, {
+        absolute: false,
+        duration: 0.62,
+        ease: 'power3.inOut',
+        nested: true,
+        prune: true,
+        scale: false,
+      });
+
+      if (nextIsRail) {
+        gsap.fromTo(
+          icons,
+          { autoAlpha: 0, scale: 0.72 },
+          { autoAlpha: 1, delay: 0.16, duration: 0.28, ease: 'power2.out', overwrite: true, scale: 1, stagger: 0.025 },
+        );
+      } else {
+        gsap.to(icons, {
+          autoAlpha: 0,
+          duration: 0.18,
+          ease: 'power2.in',
+          overwrite: true,
+          scale: 0.72,
+          onComplete: () => gsap.set(icons, { clearProps: 'all' }),
+        });
+      }
+    };
+
+    const updateScrollState = () => {
+      if (frame) return;
+
+      frame = window.requestAnimationFrame(() => {
+        morphNavigation(window.scrollY > 112);
+        frame = 0;
+      });
+    };
+
+    const handleViewportChange = () => {
+      if (!desktopQuery.matches) {
+        animation?.kill();
+        header.classList.remove('is-scrolled');
+        isRail = false;
+        gsap.set(icons, { clearProps: 'all' });
+        return;
+      }
+
+      updateScrollState();
+    };
+
+    updateScrollState();
+    window.addEventListener('scroll', updateScrollState, { passive: true });
+    window.addEventListener('resize', handleViewportChange);
+    cleanupScrollState = () => {
+      window.removeEventListener('scroll', updateScrollState);
+      window.removeEventListener('resize', handleViewportChange);
+      animation?.kill();
+      if (frame) window.cancelAnimationFrame(frame);
+    };
+  };
+
+  bindScrollState();
+  document.addEventListener('astro:before-swap', () => cleanupScrollState?.());
+  document.addEventListener('astro:page-load', bindScrollState);
+
+  let cleanupMobileMenu: (() => void) | undefined;
+
+  const bindMobileMenu = () => {
+    cleanupMobileMenu?.();
+
+    const menuButton = document.querySelector<HTMLButtonElement>('[data-menu-toggle]');
+    const mobileMenu = document.querySelector<HTMLElement>('[data-mobile-menu]');
+    const menuBackdrop = document.querySelector<HTMLButtonElement>('[data-menu-backdrop]');
+    if (!menuButton || !mobileMenu || !menuBackdrop) return;
+
+    const menuLinks = Array.from(mobileMenu.querySelectorAll<HTMLElement>('.site-mobile-menu__link'));
+    const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let menuAnimation: gsap.core.Animation | undefined;
+
+    const closeMenu = (restoreFocus = false) => {
+      menuAnimation?.kill();
+      menuButton.setAttribute('aria-expanded', 'false');
+      menuButton.setAttribute('aria-label', 'Open navigation menu');
+      document.documentElement.classList.remove('menu-open');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+
+      const finalizeClose = () => {
+        mobileMenu.classList.remove('is-open');
+        menuBackdrop.classList.remove('is-open');
+        gsap.set([mobileMenu, menuBackdrop, ...menuLinks], { clearProps: 'all' });
+      };
+
+      if (reducedMotionQuery.matches) {
+        finalizeClose();
+      } else {
+        gsap.to(menuBackdrop, {
+          autoAlpha: 0,
+          duration: 0.22,
+          ease: 'power2.in',
+          overwrite: true,
+        });
+        gsap.to(menuLinks, {
+          autoAlpha: 0,
+          duration: 0.14,
+          ease: 'power2.in',
+          overwrite: true,
+          x: 16,
+        });
+        menuAnimation = gsap.to(mobileMenu, {
+          autoAlpha: 0,
+          duration: 0.3,
+          ease: 'power3.in',
+          overwrite: true,
+          scale: 0.985,
+          x: 34,
+          onComplete: finalizeClose,
+        });
+      }
+
+      if (restoreFocus) menuButton.focus();
+    };
+
+    const toggleMenu = () => {
+      const isOpen = menuButton.getAttribute('aria-expanded') === 'true';
+      menuAnimation?.kill();
+      menuButton.setAttribute('aria-expanded', String(!isOpen));
+      menuButton.setAttribute('aria-label', isOpen ? 'Open navigation menu' : 'Close navigation menu');
+      mobileMenu.setAttribute('aria-hidden', String(isOpen));
+
+      if (isOpen) {
+        closeMenu();
+        return;
+      }
+
+      mobileMenu.classList.add('is-open');
+      menuBackdrop.classList.add('is-open');
+      document.documentElement.classList.add('menu-open');
+      if (reducedMotionQuery.matches) {
+        gsap.set([mobileMenu, menuBackdrop], { autoAlpha: 1, clearProps: 'transform' });
+        gsap.set(menuLinks, { autoAlpha: 1, clearProps: 'transform' });
+      } else {
+        gsap.fromTo(
+          menuBackdrop,
+          { autoAlpha: 0 },
+          { autoAlpha: 1, duration: 0.28, ease: 'power2.out', overwrite: true },
+        );
+        menuAnimation = gsap.fromTo(
+          mobileMenu,
+          { autoAlpha: 0, scale: 0.985, x: 34 },
+          { autoAlpha: 1, duration: 0.5, ease: 'power3.out', overwrite: true, scale: 1, x: 0 },
+        );
+        gsap.fromTo(
+          menuLinks,
+          { autoAlpha: 0, x: 18 },
+          { autoAlpha: 1, delay: 0.12, duration: 0.34, ease: 'power2.out', overwrite: true, stagger: 0.035, x: 0 },
+        );
+      }
+
+      mobileMenu.querySelector<HTMLAnchorElement>('a')?.focus();
+    };
+
+    const handleKeydown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && menuButton.getAttribute('aria-expanded') === 'true') {
+        closeMenu(true);
+      }
+    };
+
+    const handleResize = () => {
+      if (window.innerWidth >= 768) closeMenu();
+    };
+
+    const handleBackdropClick = () => closeMenu(true);
+
+    menuButton.addEventListener('click', toggleMenu);
+    menuBackdrop.addEventListener('click', handleBackdropClick);
+    mobileMenu.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => closeMenu()));
+    document.addEventListener('keydown', handleKeydown);
+    window.addEventListener('resize', handleResize);
+    cleanupMobileMenu = () => {
+      menuButton.removeEventListener('click', toggleMenu);
+      menuBackdrop.removeEventListener('click', handleBackdropClick);
+      document.removeEventListener('keydown', handleKeydown);
+      window.removeEventListener('resize', handleResize);
+      menuAnimation?.kill();
+      mobileMenu.classList.remove('is-open');
+      menuBackdrop.classList.remove('is-open');
+      gsap.set([mobileMenu, menuBackdrop, ...menuLinks], { clearProps: 'all' });
+      document.documentElement.classList.remove('menu-open');
+    };
+  };
+
+  bindMobileMenu();
+  document.addEventListener('astro:page-load', bindMobileMenu);
+</script>

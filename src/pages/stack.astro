@@ -1,0 +1,62 @@
+---
+import IconArrow from '../components/IconArrow.astro';
+import SectionLabel from '../components/SectionLabel.astro';
+import TechStack from '../components/TechStack.astro';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Stack — Jandy Arpon"
+  description="The frontend, backend, and workflow tools Jandy Arpon uses to build practical web and mobile products."
+>
+  <section class="container-shell page-hero pt-20 md:pt-32">
+    <SectionLabel label="Technology stack" />
+    <div class="mt-8 grid gap-8 border-b rule pb-12 md:grid-cols-[1.15fr_0.85fr] md:items-end md:gap-16 md:pb-16">
+      <h1 class="max-w-5xl text-[clamp(3.8rem,10vw,10rem)] font-medium leading-[0.84] tracking-[-0.105em]">
+        Tools for<br /><span class="display-serif">useful work.</span>
+      </h1>
+      <div class="page-hero__aside max-w-sm">
+        <p class="text-lg leading-snug text-[var(--muted)]">
+          The languages, frameworks, and workflow tools I use to shape clear interfaces and dependable products.
+        </p>
+        <div class="page-hero__meta">
+          <div class="page-hero__meta-item">
+            <span class="page-hero__meta-label">Frontend</span>
+            <span class="page-hero__meta-value">05</span>
+          </div>
+          <div class="page-hero__meta-item">
+            <span class="page-hero__meta-label">Backend</span>
+            <span class="page-hero__meta-value">05</span>
+          </div>
+          <div class="page-hero__meta-item">
+            <span class="page-hero__meta-label">Workflow</span>
+            <span class="page-hero__meta-value">05</span>
+          </div>
+        </div>
+        <a class="button-secondary w-fit" href="/projects">See the work <IconArrow /></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="container-shell section-space pt-16 md:pt-24">
+    <div class="grid gap-12 md:grid-cols-[0.5fr_1.5fr] md:gap-20">
+      <SectionLabel index="01" label="My stack" />
+      <div>
+        <p class="mb-10 max-w-xl text-lg leading-relaxed text-[var(--muted)]">
+          Every tool has a job: build a responsive experience, support a reliable system, or keep the work moving from
+          idea to release.
+        </p>
+        <TechStack />
+      </div>
+    </div>
+  </section>
+
+  <section class="container-shell pb-24 md:pb-40">
+    <div class="flex flex-col gap-6 border-t rule pt-8 md:flex-row md:items-center md:justify-between">
+      <p class="max-w-xl text-2xl font-medium leading-tight tracking-[-0.05em]">
+        Have a product in mind? Let’s choose the right tools for it.
+      </p>
+      <a class="button-primary" href="/contact">Start a conversation <IconArrow /></a>
+    </div>
+  </section>
+</Layout>

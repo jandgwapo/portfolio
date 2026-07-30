@@ -1,0 +1,71 @@
+---
+import IconArrow from './IconArrow.astro';
+import ProjectVisual from './ProjectVisual.astro';
+import ProjectTools from './ProjectTools.astro';
+import type { Project } from '../types';
+
+interface Props {
+  project: Project;
+  reverse?: boolean;
+}
+
+const { project, reverse = false } = Astro.props;
+---
+
+<article class="grid gap-8 border-t rule py-8 md:grid-cols-2 md:items-stretch md:gap-10 md:py-12">
+  <div class:list={[reverse && 'md:order-2']}>
+    {
+      project.liveUrl ? (
+        <div class="project-image live-site-preview relative aspect-[16/10] w-full">
+          <iframe
+            src={project.liveUrl}
+            title={`${project.title} live homepage preview`}
+            loading="lazy"
+            referrerpolicy="no-referrer"
+            class="pointer-events-none absolute inset-0 block h-full w-full border-0 bg-[var(--background-raised)]"
+          />
+          <span class="pointer-events-none absolute bottom-3 left-3 bg-[var(--accent)] px-2 py-1 text-[0.6rem] font-bold uppercase tracking-[0.12em] text-[#020202]">
+            Live homepage
+          </span>
+        </div>
+      ) : (
+        <ProjectVisual src={project.image} alt={project.imageAlt} className="aspect-[4/3] w-full" />
+      )
+    }
+  </div>
+  <div class:list={['flex flex-col justify-between gap-10 md:py-2', reverse && 'md:order-1']}>
+    <div>
+      <div
+        class="mb-4 flex items-center gap-2 text-[0.68rem] font-bold uppercase tracking-[0.14em] text-[var(--muted)]"
+      >
+        <span>{project.number}</span>
+        <span class="h-1 w-1 rounded-full bg-[var(--accent-deep)]"></span>
+        <span>{project.category}</span>
+        <span class="h-1 w-1 rounded-full bg-[var(--accent-deep)]"></span>
+        <span>{project.year}</span>
+      </div>
+      <h3 class="max-w-xl text-[clamp(2rem,4vw,4.5rem)] font-medium leading-[0.9] tracking-[-0.09em]">
+        {project.title}
+      </h3>
+      <p class="mt-6 max-w-md text-lg leading-relaxed text-[var(--muted)]">{project.description}</p>
+      <div class="mt-6">
+        <ProjectTools tools={project.tools} />
+      </div>
+    </div>
+    <div class="flex flex-wrap items-center gap-5">
+      <a class="button-primary" href={`/projects/${project.slug}`}>View case study <IconArrow /></a>
+      {
+        project.liveUrl && (
+          <a
+            class="group inline-flex items-center gap-2 border-b border-[var(--foreground)] pb-2 text-sm font-semibold"
+            href={project.liveUrl}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Open live site <IconArrow />
+          </a>
+        )
+      }
+    </div>
+  </div>
+</article>

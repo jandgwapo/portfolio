@@ -1,0 +1,108 @@
+---
+import ProjectFilter from '../../components/ProjectFilter';
+import SectionLabel from '../../components/SectionLabel.astro';
+import Layout from '../../layouts/Layout.astro';
+import { categories, projects } from '../../data/projects';
+
+const requestedCategory = Astro.url.searchParams.get('category') ?? 'All';
+const initialCategory =
+  categories.find((category) => category.trim().toLowerCase() === requestedCategory.trim().toLowerCase()) ?? 'All';
+---
+
+<Layout title="Projects — Jandy Arpon" description="Selected web, mobile, and full-stack projects by Jandy Arpon.">
+  <section class="container-shell page-hero pt-20 md:pt-32">
+    <SectionLabel label="Selected projects" />
+    <div class="mt-8 grid gap-8 border-b rule pb-12 md:grid-cols-[minmax(0,1.1fr)_minmax(16rem,0.9fr)] md:items-end md:gap-16 md:pb-16">
+      <h1 class="max-w-5xl text-[clamp(3.8rem,10vw,10rem)] font-medium leading-[0.84] tracking-[-0.105em]">
+        Web and mobile<br /><span class="display-serif">built for use.</span>
+      </h1>
+      <div class="page-hero__aside max-w-sm">
+        <p class="text-lg leading-snug text-[var(--muted)]">
+          Websites, mobile apps, and full-stack systems built with Flutter, Laravel, React, Astro, MySQL, and Supabase.
+        </p>
+        <div class="page-hero__meta">
+          <div class="page-hero__meta-item">
+            <span class="page-hero__meta-label">Projects</span>
+            <span class="page-hero__meta-value">03</span>
+          </div>
+          <div class="page-hero__meta-item">
+            <span class="page-hero__meta-label">Focus</span>
+            <span class="page-hero__meta-value">Web + mobile</span>
+          </div>
+          <div class="page-hero__meta-item">
+            <span class="page-hero__meta-label">Based</span>
+            <span class="page-hero__meta-value">PH</span>
+          </div>
+        </div>
+        <a class="button-secondary w-fit" href="/contact">Discuss a project <span aria-hidden="true">↗</span></a>
+      </div>
+    </div>
+  </section>
+  <section class="container-shell section-space pt-16 md:pt-24">
+    <div class="mb-10 flex flex-col justify-between gap-4 border-b rule pb-6 md:flex-row md:items-end">
+      <p class="section-intro">
+        Browse by category to see the different kinds of products I build. Open a project for the decisions, tools,
+        and context behind the final result.
+      </p>
+      <span class="font-mono text-[0.58rem] uppercase tracking-[0.08em] text-[var(--muted)]">Updated / 2026</span>
+    </div>
+    <ProjectFilter projects={projects} categories={categories} initialCategory={initialCategory} client:load />
+  </section>
+  <script>
+    const bindProjectFilters = () => {
+      const root = document.querySelector<HTMLElement>('[data-project-filter-root]');
+      if (!root || root.dataset.projectFiltersBound === 'true') return;
+
+      root.dataset.projectFiltersBound = 'true';
+      const normalize = (value: string) => value.trim().toLowerCase();
+      const buttons = Array.from(root.querySelectorAll<HTMLAnchorElement>('[data-project-category]'));
+      const label = root.querySelector<HTMLElement>('[data-project-filter-label]');
+      const result = root.querySelector<HTMLElement>('[data-project-filter-result]');
+      const cards = Array.from(root.querySelectorAll<HTMLElement>('.project-link')).filter((card) =>
+        card.querySelector('[data-project-card-category]'),
+      );
+
+      const updateFilter = (category: string) => {
+        const normalizedCategory = normalize(category);
+        let visibleCount = 0;
+
+        buttons.forEach((button) => {
+          const isActive = normalize(button.dataset.projectCategory ?? '') === normalizedCategory;
+          button.setAttribute('aria-current', isActive ? 'page' : 'false');
+        });
+
+        cards.forEach((card) => {
+          const cardCategory = card.querySelector<HTMLElement>('[data-project-card-category]')?.dataset.projectCardCategory ?? '';
+          const isVisible = normalizedCategory === 'all' || normalize(cardCategory) === normalizedCategory;
+          card.hidden = !isVisible;
+          if (isVisible) visibleCount += 1;
+        });
+
+        if (label) label.textContent = 'Filter / ' + category;
+        if (result) result.textContent = 'Showing ' + visibleCount + ' of ' + cards.length + ' projects';
+      };
+
+      const requestedCategory = new URL(window.location.href).searchParams.get('category') ?? 'All';
+      const initialButton = buttons.find(
+        (button) => normalize(button.dataset.projectCategory ?? '') === normalize(requestedCategory),
+      );
+      updateFilter(initialButton?.dataset.projectCategory ?? 'All');
+
+      root.addEventListener('click', (event) => {
+        const target = event.target;
+        if (!(target instanceof Element)) return;
+
+        const button = target.closest<HTMLAnchorElement>('[data-project-category]');
+        if (!button || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+
+        event.preventDefault();
+        const category = button.dataset.projectCategory ?? 'All';
+        updateFilter(category);
+        window.history.replaceState({}, '', button.href);
+      });
+    };
+
+    bindProjectFilters();
+    document.addEventListener('astro:page-load', bindProjectFilters);
+  </script>
+</Layout>
