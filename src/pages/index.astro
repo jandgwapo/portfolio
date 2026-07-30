@@ -5,6 +5,7 @@ import SectionLabel from '../components/SectionLabel.astro';
 import SocialIcon from '../components/SocialIcon.astro';
 import Layout from '../layouts/Layout.astro';
 import { featuredProjects } from '../data/projects';
+import { sitePath } from '../utils/site-path';
 ---
 
 <Layout
@@ -17,7 +18,7 @@ import { featuredProjects } from '../data/projects';
         class="h-24 w-24 shrink-0 overflow-hidden rounded-[1.25rem] border rule bg-[var(--background-raised)] md:h-64 md:w-64"
       >
         <img
-          src="/me.png"
+          src={sitePath('/me.png')}
           alt="Portrait of Jandy Arpon"
           loading="eager"
           decoding="async"
@@ -96,7 +97,7 @@ import { featuredProjects } from '../data/projects';
         </p>
         <div class="mt-8 flex flex-wrap gap-3">
           <a class="button-primary" href="#about">About me <IconArrow /></a>
-          <a class="button-secondary" href="/projects">View projects <IconArrow /></a>
+          <a class="button-secondary" href={sitePath('/projects')}>View projects <IconArrow /></a>
         </div>
       </div>
     </div>
@@ -142,7 +143,7 @@ import { featuredProjects } from '../data/projects';
         </div>
         <a
           class="group mt-8 inline-flex items-center gap-2 border-b border-[var(--foreground)] pb-2 text-sm font-semibold"
-          href="/about">More about how I work <IconArrow /></a
+          href={sitePath('/about')}>More about how I work <IconArrow /></a
         >
       </div>
     </div>
@@ -214,7 +215,7 @@ import { featuredProjects } from '../data/projects';
           </p>
           <a
             class="group mt-6 inline-flex items-center gap-2 border-b border-[var(--foreground)] pb-2 text-sm font-semibold"
-            href="/about"
+            href={sitePath('/about')}
           >
             Read my process <IconArrow />
           </a>
@@ -231,7 +232,7 @@ import { featuredProjects } from '../data/projects';
           Projects built for real use.
         </h2>
       </div>
-      <a class="group hidden items-center gap-2 pb-1 text-sm font-semibold md:flex" href="/projects"
+      <a class="group hidden items-center gap-2 pb-1 text-sm font-semibold md:flex" href={sitePath('/projects')}
         >See all projects <IconArrow /></a
       >
     </div>
@@ -242,7 +243,7 @@ import { featuredProjects } from '../data/projects';
         ))
       }
     </div>
-    <a class="button-secondary mt-10 md:hidden" href="/projects">See all projects <IconArrow /></a>
+    <a class="button-secondary mt-10 md:hidden" href={sitePath('/projects')}>See all projects <IconArrow /></a>
   </section>
 
   <section id="skills" class="container-shell border-t rule py-20 md:py-28">
@@ -291,7 +292,7 @@ import { featuredProjects } from '../data/projects';
         <p class="mt-8 max-w-md text-lg leading-relaxed text-[var(--muted)]">
           Tell me what you’re trying to build, improve, or move from idea to launch. I’d love to hear about it.
         </p>
-        <a class="button-primary mt-8" href="/contact">Let’s talk <IconArrow /></a>
+        <a class="button-primary mt-8" href={sitePath('/contact')}>Let’s talk <IconArrow /></a>
       </div>
     </div>
   </section>

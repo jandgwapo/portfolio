@@ -1,5 +1,6 @@
 ---
 import NavIcon from './NavIcon.astro';
+import { sitePath } from '../utils/site-path';
 
 const navItems = [
   { href: '/', label: 'Home', icon: 'home' },
@@ -15,13 +16,13 @@ const currentPath = Astro.url.pathname;
 
 const isCurrentPage = (href: string) =>
   href === '/'
-    ? currentPath === '/'
-    : !href.includes('#') && (currentPath === href || currentPath.startsWith(`${href}/`));
+    ? currentPath === sitePath('/')
+    : !href.includes('#') && (currentPath === sitePath(href) || currentPath.startsWith(`${sitePath(href)}/`));
 ---
 
 <header class="container-shell site-header relative z-40">
   <nav class="site-nav flex items-center justify-between" aria-label="Main navigation">
-    <a href="/" class="site-logo group flex items-center gap-2.5" aria-label="Jandy Arpon home">
+    <a href={sitePath('/')} class="site-logo group flex items-center gap-2.5" aria-label="Jandy Arpon home">
       <span class="site-logo__mark">JA</span>
       <span class="min-w-0">
         <span class="site-logo__name block">Jandy Arpon</span>
@@ -34,7 +35,7 @@ const isCurrentPage = (href: string) =>
         {
           navItems.map((item) => (
             <a
-              href={item.href}
+              href={sitePath(item.href)}
               class:list={['site-nav__link', { 'text-[var(--foreground)]': isCurrentPage(item.href) }]}
               aria-current={isCurrentPage(item.href) ? 'page' : undefined}
             >
@@ -147,7 +148,7 @@ const isCurrentPage = (href: string) =>
       {
         navItems.map((item, index) => (
           <a
-            href={item.href}
+            href={sitePath(item.href)}
             class="site-mobile-menu__link"
             aria-current={isCurrentPage(item.href) ? 'page' : undefined}
           >

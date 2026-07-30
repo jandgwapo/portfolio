@@ -3,6 +3,7 @@ import IconArrow from '../components/IconArrow.astro';
 import SectionLabel from '../components/SectionLabel.astro';
 import TechStack from '../components/TechStack.astro';
 import Layout from '../layouts/Layout.astro';
+import { sitePath } from '../utils/site-path';
 ---
 
 <Layout
@@ -33,7 +34,7 @@ import Layout from '../layouts/Layout.astro';
             <span class="page-hero__meta-value">05</span>
           </div>
         </div>
-        <a class="button-secondary w-fit" href="/projects">See the work <IconArrow /></a>
+        <a class="button-secondary w-fit" href={sitePath('/projects')}>See the work <IconArrow /></a>
       </div>
     </div>
   </section>
@@ -56,7 +57,7 @@ import Layout from '../layouts/Layout.astro';
       <p class="max-w-xl text-2xl font-medium leading-tight tracking-[-0.05em]">
         Have a product in mind? Let’s choose the right tools for it.
       </p>
-      <a class="button-primary" href="/contact">Start a conversation <IconArrow /></a>
+      <a class="button-primary" href={sitePath('/contact')}>Start a conversation <IconArrow /></a>
     </div>
   </section>
 </Layout>

@@ -7,7 +7,8 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://jandyarpon.dev',
+  site: 'https://jandgwapo.github.io',
+  base: '/portfolio',
   devToolbar: {
     enabled: false,
   },
